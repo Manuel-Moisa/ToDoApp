@@ -16,7 +16,12 @@ namespace api.Controllers
         _context = context;
       }
 
-      [HttpGet("{id}")]
+    [HttpGet]
+          public async Task<ActionResult<IEnumerable<TodoDto>>> GetTodos()
+          { 
+                return await _context.Todos.Select(t => t.ToTodoDto()).ToListAsync();
+          }
+    [HttpGet("{id}")]
         public async Task<ActionResult<Todos>> GetTodo(int id)
         {
             var todo = await _context.Todos.FindAsync(id);
