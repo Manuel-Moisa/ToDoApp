@@ -1,5 +1,5 @@
 using api.Models;
-
+using api.Repository;
 
 namespace api.Interfaces
 {

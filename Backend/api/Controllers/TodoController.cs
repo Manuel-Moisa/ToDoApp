@@ -4,6 +4,8 @@ using api.Models;
 using Microsoft.EntityFrameworkCore;
 using api.Dtos.Todo;
 using api.Mappers;
+using api.Repository;
+using api.Interfaces;
 
 namespace api.Controllers
 {
@@ -12,34 +14,36 @@ namespace api.Controllers
     
     public class TodoController : ControllerBase
     {
-    private readonly ItodoRepository _repository;
+    private readonly ITodoRepository _repository;
    
-      public TodoController(ItodoRepository todoRepo)
+      public TodoController(ITodoRepository todoRepo)
       {
         _repository = todoRepo;
       }
 
     [HttpGet]
           public async Task<ActionResult<IEnumerable<TodoDto>>> GetTodos()
-          { 
-                return await _repository.GetAllTodos().Select(t => t.ToTodoDto()).ToListAsync();
+          {     
+            var todos = await _repository.GetAllTodos();
+            var todoDtos = todos.Select(t => t.ToTodoDto()).ToList();
+            return Ok(todoDtos);
           }
     [HttpGet("{id}")]
-        public async Task<ActionResult<Todos>> GetTodo(int id)
+        public async Task<ActionResult<TodoDto>> GetTodoById(int id)
         {
             var todo = await _repository.GetTodoById(id);
             if (todo == null)
             {
             return NotFound();
             }
-            return todo;
+            return Ok(todo.ToTodoDto());
         }
     [HttpPost]
         public async Task<ActionResult<Todos>> CreateTodo(CreateTextRequestDto createTodoDto)
         {
             var todo = createTodoDto.ToTodo();
-            _repository.CreateTodo(todo);
-            return CreatedAtAction(nameof(GetTodo), new { id = todo.Id }, todo);
+            await _repository.CreateTodo(todo);
+            return CreatedAtAction(nameof(GetTodoById), new { id = todo.Id }, todo);
         }
     [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTodo(int id, UpdateTextRequestDto TodoDto)
@@ -54,7 +58,7 @@ namespace api.Controllers
             todo.Is_done = TodoDto.Is_done;
             todo.Kategorie = TodoDto.Kategorie;
             todo.Bearbeitet = DateTime.Now;
-            _repository.UpdateTodo(todo);
+            await _repository.UpdateTodo(todo);
             return NoContent();
         } 
     [HttpDelete("{id}")]
@@ -65,7 +69,7 @@ namespace api.Controllers
             {
                 return NotFound();
             }
-            _repository.DeleteTodo(id);
+            await _repository.DeleteTodo(id);
             return NoContent();
         }
     }
