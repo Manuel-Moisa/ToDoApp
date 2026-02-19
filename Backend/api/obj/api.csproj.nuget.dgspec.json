@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\to do list web\\api\\api.csproj": {}
+    "C:\\ToDoApp\\Backend\\api\\api.csproj": {}
   },
   "projects": {
-    "C:\\to do list web\\api\\api.csproj": {
+    "C:\\ToDoApp\\Backend\\api\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\to do list web\\api\\api.csproj",
+        "projectUniqueName": "C:\\ToDoApp\\Backend\\api\\api.csproj",
         "projectName": "api",
-        "projectPath": "C:\\to do list web\\api\\api.csproj",
+        "projectPath": "C:\\ToDoApp\\Backend\\api\\api.csproj",
         "packagesPath": "C:\\Users\\ManuelIonutMoisa\\.nuget\\packages\\",
-        "outputPath": "C:\\to do list web\\api\\obj\\",
+        "outputPath": "C:\\ToDoApp\\Backend\\api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -53,6 +53,10 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.3, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[10.1.4, )"
             }
           },
           "imports": [
