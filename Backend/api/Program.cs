@@ -1,7 +1,14 @@
+using api.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -19,6 +26,6 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// app.UseHttpsRedirection(); // Falls du die Warnung von vorhin noch hast, lass das erst mal weg
+app.UseHttpsRedirection(); 
 
 app.Run();
