@@ -41,7 +41,25 @@ namespace api.Controllers
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetTodo), new { id = todo.Id }, todo);
         }
-    
+    [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTodo(int id, UpdateTextRequestDto todoDto)
+        {
+            if (id != todoDto.Id)
+            {
+                return BadRequest();
+            }
+            var todo = await _context.Todos.FindAsync(id);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+            todo.Text = todoDto.Text;
+            todo.Is_done = todoDto.Is_done;
+            todo.Kategorie = todoDto.Kategorie;
+            todo.Bearbeitet = DateTime.Now;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        } 
     }
 }
   
