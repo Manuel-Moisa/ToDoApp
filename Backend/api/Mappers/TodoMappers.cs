@@ -1,5 +1,6 @@
-using api.Dtos;
+using api.Dtos.Todo;
 using api.Models;
+
 
 namespace api.Mappers;
 
@@ -13,8 +14,6 @@ public static class TodoMappers
             Text = todo.Text,
             Is_done = todo.Is_done,
             Kategorie = todo.Kategorie,
-            Kreiert = todo.Kreiert,
-            Bearbeitet = todo.Bearbeitet
         };
     }
 }
