@@ -28,6 +28,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection(); 
 
-app.mapControllers();
+app.MapControllers();
 
 app.Run();
