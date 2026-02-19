@@ -1,4 +1,4 @@
-
+namespace api.Models;
 public class Todos
 {
     public int Id { get; set; }
