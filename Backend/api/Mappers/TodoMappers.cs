@@ -16,4 +16,14 @@ public static class TodoMappers
             Kategorie = todo.Kategorie,
         };
     }
+    public static Todos ToTodo(this CreateTextRequestDto createTodoDto)
+    {
+        return new Todos
+        {
+            Text = createTodoDto.Text,
+            Is_done = false,
+            Kategorie = createTodoDto.Kategorie
+        };
+    }
 }
+

@@ -33,6 +33,15 @@ namespace api.Controllers
             }
             return todo;
         }
-
+    [HttpPost]
+        public async Task<ActionResult<Todos>> CreateTodo(CreateTextRequestDto createTodoDto)
+        {
+            var todo = createTodoDto.ToTodo();
+            _context.Todos.Add(todo);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetTodo), new { id = todo.Id }, todo);
+        }
+    
     }
 }
+  
