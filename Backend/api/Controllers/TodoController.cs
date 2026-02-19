@@ -1,4 +1,7 @@
-
+using Microsoft.AspNetCore.Mvc; 
+using api.Data;                
+using api.Models;               
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
