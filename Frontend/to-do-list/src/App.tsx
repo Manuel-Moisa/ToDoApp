@@ -1,5 +1,5 @@
 import "./App.css";
-import ToDoList from "./componets/ToDoList";
+import ToDoList from "./componets/TodoList/ToDoList";
 function App() {
 	return (
 		<div className="app-container">
