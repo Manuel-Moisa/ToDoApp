@@ -12,7 +12,7 @@ export const todoService = {
 	},
 
 	async create(data: CreateTodoDto): Promise<Todo> {
-		return api.post<Todo>(API_ENDPOINTS.CrEATE_TODO, data);
+		return api.post<Todo>(API_ENDPOINTS.CREATE_TODO, data);
 	},
 
 	async update(id: number, data: UpdateTodoDto): Promise<void> {

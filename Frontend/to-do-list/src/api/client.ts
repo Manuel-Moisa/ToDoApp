@@ -1,5 +1,5 @@
 // API Base URL
-const API_BASE_URL = import.meta.env.VITE_API_URL || "https://localhost:7000";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5113";
 
 /**
  * Helper function für API Calls
