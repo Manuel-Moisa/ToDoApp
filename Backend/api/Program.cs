@@ -5,6 +5,7 @@ using api.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -14,6 +15,16 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 
+builder.Services.AddCors(option =>
+{
+    option.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .WithExposedHeaders("Location");
+    });
+});
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -31,6 +42,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection(); 
+
+app.UseCors();
 
 app.MapControllers();
 
